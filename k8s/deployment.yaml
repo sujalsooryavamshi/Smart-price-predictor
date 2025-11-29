@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: smart-price-predictor-deployment
+  labels:
+    app: smart-price-predictor
+spec:
+  replicas: 2   # Run 2 pods for reliability
+  selector:
+    matchLabels:
+      app: smart-price-predictor
+  template:
+    metadata:
+      labels:
+        app: smart-price-predictor
+    spec:
+      containers:
+        - name: smart-price-predictor
+          image: sujalps/smart-price-predictor:latest
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
